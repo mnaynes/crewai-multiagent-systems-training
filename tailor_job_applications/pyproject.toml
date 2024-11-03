@@ -1,0 +1,20 @@
+[project]
+name = "tailor_job_applications"
+version = "0.1.0"
+description = "tailor-job-applications using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.76.9,<1.0.0"
+]
+
+[project.scripts]
+tailor_job_applications = "tailor_job_applications.main:run"
+run_crew = "tailor_job_applications.main:run"
+train = "tailor_job_applications.main:train"
+replay = "tailor_job_applications.main:replay"
+test = "tailor_job_applications.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
