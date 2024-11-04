@@ -1,0 +1,19 @@
+research_task:
+  description: >
+    Collect unique email addresses from commenters on {social_media} posts with
+    specific keywords like {keywords}
+  expected_output: >
+    A list of unique email addresses.
+    Limit the number of emails addresses to 20.
+  output_file: 'email_addresses.txt'
+  agent: researcher
+
+# email_marketing_task:
+#   description: >
+#     Create personalized email marketing campaigns based from the {offer}
+#     document to verified email addresses collected by the {researcher}
+#   expected_output: >
+#     A list of email addresses that received the email marketing campaign.
+#   context:
+#     - research_task
+#   agent: email_marketing_specialist

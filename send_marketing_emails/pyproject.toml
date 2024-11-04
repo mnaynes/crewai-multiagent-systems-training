@@ -1,0 +1,20 @@
+[project]
+name = "send_marketing_emails"
+version = "0.1.0"
+description = "send-marketing-emails using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.76.9,<1.0.0"
+]
+
+[project.scripts]
+send_marketing_emails = "send_marketing_emails.main:run"
+run_crew = "send_marketing_emails.main:run"
+train = "send_marketing_emails.main:train"
+replay = "send_marketing_emails.main:replay"
+test = "send_marketing_emails.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
