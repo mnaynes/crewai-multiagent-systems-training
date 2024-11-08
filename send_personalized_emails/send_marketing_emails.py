@@ -88,7 +88,8 @@ email_sender_agent = create_openai_functions_agent(langchain_llm, email_sender_t
 email_sender_agent_executor = AgentExecutor(agent=email_sender_agent, tools=email_sender_tools, verbose=True)
 
 ###################### Tasks ######################
-researcher_task=f"Get email addresses from websites in the list {websites} and return a list of email addresses."
+researcher_task=f"""Get email addresses from websites in the list {websites} and return ONLY a list of email addresses.
+Format the output as a Python list of strings, like: ['email1@example.com', 'email2@example.com']"""
 
 email_writer_task = Task(
     description=(
@@ -117,7 +118,6 @@ crew = Crew(
 ####################### Run Crew #######################
 result = researcher_agent_executor.invoke({"input": researcher_task})
 researcher_result = result['output']
-print(researcher_result)
 
 result = crew.kickoff(inputs={
     "document": offer_document,
