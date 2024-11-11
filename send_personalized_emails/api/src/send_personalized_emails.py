@@ -3,6 +3,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 from src.custom_functions import parse_websites
+from src.json_gmail_send_email import EmailOutput
 
 from crewai import Agent, Task, Crew, LLM
 from crewai_tools import DOCXSearchTool
@@ -12,9 +13,6 @@ from langchain.agents import create_openai_functions_agent, AgentExecutor
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder, HumanMessagePromptTemplate
 from langchain.schema import SystemMessage
 
-from pydantic import BaseModel
-from typing import List
-
 import os
 
 def send_personalized_emails(websites, offer_document):
@@ -23,22 +21,11 @@ def send_personalized_emails(websites, offer_document):
     from dotenv import load_dotenv, find_dotenv
     _ = load_dotenv(find_dotenv()) # read local .env file
 
-    # JSON model for GMAIL_SEND_EMAIL tool
-    class EmailParams(BaseModel):
-        recipient_email: str
-        subject: str
-        body: str
-        user_id: str
-        is_html: bool
-
-    class EmailOutput(BaseModel):
-        emails: List[EmailParams]
-
     ###################### LLM ######################
     langchain_llm = ChatOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     llm = LLM(
         model="gpt-4o",
-        base_url="https://api.openai.com/v1",
+        base_url=os.getenv("OPENAI_API_BASE"),
         api_key=os.getenv("OPENAI_API_KEY"),
         temperature=0.5
     )
