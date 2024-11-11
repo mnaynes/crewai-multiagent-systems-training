@@ -1,5 +1,4 @@
 import argparse
-import os
 
 def handle_options():
     parser = argparse.ArgumentParser(
