@@ -1,6 +1,3 @@
-fastapi
-uvicorn
-python-multipart  # if you're handling form data
 aiohappyeyeballs==2.4.3
 aiohttp==3.10.10
 aiosignal==1.3.1

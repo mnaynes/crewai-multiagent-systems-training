@@ -1,20 +1,27 @@
+#api/index.py
+
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from src.send_personalized_emails import send_personalized_emails
 
 app = FastAPI()
 
-# Configure CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
-)
+# Create a request model
+class EmailRequest(BaseModel):
+    websites: str
+    offer_document: str
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@app.get('/')
+def hello_world():
+    return "Hello,World"
+
+@app.post('/send-personalized-emails')
+def send_personalized_emails_endpoint(request: EmailRequest):
+    return send_personalized_emails(request.websites, request.offer_document)
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app)
 
 
 # from http.server import BaseHTTPRequestHandler
