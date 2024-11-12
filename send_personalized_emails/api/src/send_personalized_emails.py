@@ -106,8 +106,8 @@ def send_personalized_emails(websites, offer_document):
 
     result = crew.kickoff(inputs={
         "document": offer_document,
-        # "customers": researcher_result,
-        "customers": ["naynesmikel@gmail.com"],
+        "customers": researcher_result,
+        # "customers": ["naynesmikel@gmail.com"],
         "verbose": True
     })
     email_writer_result = result['emails']
